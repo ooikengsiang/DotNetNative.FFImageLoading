@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-macos;net8.0;net8.0-android;net8.0-ios;net8.0-macos</TargetFrameworks>
+    <PackageId>DotNetNative.FFImageLoading</PackageId>
+    <AssemblyName>FFImageLoading</AssemblyName>
+    <authors>Ooi Keng Siang, Daniel Luberda, Fabien Molinet</authors>
+    <Version>3.0.0</Version>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Title>FFImageLoading Library for .NET 7 / .NET 8 native iOS / Android / Mac</Title>
+    <PackageDescription>
+Library to load images quickly and easily.
+
+Features:
+
+- Support .NET 7 / .NET 8 native iOS / Android / Mac
+- Configurable disk and memory caching
+- Multiple image views using the same image source (url, path, resource) will use only one bitmap which is cached in memory (less memory usage)
+- Deduplication of similar download/load requests. *(If 100 similar requests arrive at same time then one real loading will be performed while 99 others will wait).*
+- Error and loading placeholders support
+- Images can be automatically downsampled to specified size (less memory usage)
+- Fluent API which is inspired by Picasso naming
+- SVG / GIF support
+- Image loading Fade-In animations support
+- Can retry image downloads (RetryCount, RetryDelay)
+- Android bitmap optimization. Saves 50% of memory by trying not to use transparency channel when possible.
+- Transformations support
+- BlurredTransformation
+- CircleTransformation, RoundedTransformation, CornersTransformation, CropTransformation
+- ColorSpaceTransformation, GrayscaleTransformation, SepiaTransformation, TintTransformation
+- FlipTransformation, RotateTransformation
+- Supports custom transformations (native platform `ITransformation` implementations)
+    </PackageDescription>
+    <PackageTags>xamarin, .net, .net7, .net8, native, android, ios, mac, image, cache, caching, memory, bitmap, lru, load, loading, save, effects, photo</PackageTags>
+    <RepositoryUrl>https://github.com/ooikengsiang/DotNetNative.FFImageLoading.git</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net7.0' or '$(TargetFramework)'=='net8.0'">
+    <DefineConstants>__MOCK__</DefineConstants>
+  </PropertyGroup>
+</Project>
