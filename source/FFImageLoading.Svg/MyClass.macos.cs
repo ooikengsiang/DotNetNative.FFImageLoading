@@ -235,7 +235,7 @@ namespace FFImageLoading.Svg.Shared
 
                             var x = ReadNumber(e.Attribute("x"));
                             var y = ReadNumber(e.Attribute("y"));
-                            var useTransform = SKMatrix.MakeTranslation(x, y);
+                            var useTransform = SKMatrix.CreateTranslation(x, y);
 
                             canvas.Save();
                             canvas.Concat(ref useTransform);
@@ -672,7 +672,7 @@ namespace FFImageLoading.Svg.Shared
 
         private SKMatrix ReadTransform(string raw)
         {
-            var t = SKMatrix.MakeIdentity();
+            var t = SKMatrix.CreateIdentity();
 
             if (string.IsNullOrWhiteSpace(raw))
             {
@@ -683,7 +683,7 @@ namespace FFImageLoading.Svg.Shared
             foreach (var c in calls)
             {
                 var args = c.Split(new[] { '(', ',', ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                var nt = SKMatrix.MakeIdentity();
+                var nt = SKMatrix.CreateIdentity();
                 switch (args[0])
                 {
                     case "matrix":
@@ -704,22 +704,22 @@ namespace FFImageLoading.Svg.Shared
                     case "translate":
                         if (args.Length >= 3)
                         {
-                            nt = SKMatrix.MakeTranslation(ReadNumber(args[1]), ReadNumber(args[2]));
+                            nt = SKMatrix.CreateTranslation(ReadNumber(args[1]), ReadNumber(args[2]));
                         }
                         else if (args.Length >= 2)
                         {
-                            nt = SKMatrix.MakeTranslation(ReadNumber(args[1]), 0);
+                            nt = SKMatrix.CreateTranslation(ReadNumber(args[1]), 0);
                         }
                         break;
                     case "scale":
                         if (args.Length >= 3)
                         {
-                            nt = SKMatrix.MakeScale(ReadNumber(args[1]), ReadNumber(args[2]));
+                            nt = SKMatrix.CreateScale(ReadNumber(args[1]), ReadNumber(args[2]));
                         }
                         else if (args.Length >= 2)
                         {
                             var sx = ReadNumber(args[1]);
-                            nt = SKMatrix.MakeScale(sx, sx);
+                            nt = SKMatrix.CreateScale(sx, sx);
                         }
                         break;
                     case "rotate":
@@ -728,22 +728,22 @@ namespace FFImageLoading.Svg.Shared
                         {
                             var x = ReadNumber(args[2]);
                             var y = ReadNumber(args[3]);
-                            var t1 = SKMatrix.MakeTranslation(x, y);
-                            var t2 = SKMatrix.MakeRotationDegrees(a);
-                            var t3 = SKMatrix.MakeTranslation(-x, -y);
-                            SKMatrix.Concat(ref nt, ref t1, ref t2);
-                            SKMatrix.Concat(ref nt, ref nt, ref t3);
+                            var t1 = SKMatrix.CreateTranslation(x, y);
+                            var t2 = SKMatrix.CreateRotationDegrees(a);
+                            var t3 = SKMatrix.CreateTranslation(-x, -y);
+                            SKMatrix.Concat(ref nt, t1, t2);
+                            SKMatrix.Concat(ref nt, nt, t3);
                         }
                         else
                         {
-                            nt = SKMatrix.MakeRotationDegrees(a);
+                            nt = SKMatrix.CreateRotationDegrees(a);
                         }
                         break;
                     default:
                         LogOrThrow($"Can't transform {args[0]}");
                         break;
                 }
-                SKMatrix.Concat(ref t, ref t, ref nt);
+                SKMatrix.Concat(ref t, t, nt);
             }
 
             return t;

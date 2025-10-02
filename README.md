@@ -1,8 +1,8 @@
 # DotNetNative.FFImageLoading - Fast & Furious Image Loading 
 
-FFImageLoading Library for .NET 7 / .NET 8 native iOS / Android / Mac.
+FFImageLoading Library for .NET 8 / .NET 9 native iOS / Android / Mac.
 
-*This is a quick / lazy port from Xamarin.FFImageLoading to support .NET 7 and .NET 8 since Xamarin is going away. If you are looking for MAUI support, this is not the one you are looking for.*
+*This is a quick / lazy port from Xamarin.FFImageLoading to support .NET 8 and .NET 8 since Xamarin is going away. If you are looking for MAUI support, this is not the one you are looking for.*
 
 ## NuGet
 FFImageLoading: https://www.nuget.org/packages/DotNetNative.FFImageLoading
@@ -12,7 +12,7 @@ FFImageLoading.Transformations: https://www.nuget.org/packages/DotNetNative.FFIm
 FFImageLoading.Svg: https://www.nuget.org/packages/DotNetNative.FFImageLoading.Svg
 
 ## Features
-- Support .NET 7 / .NET 8 native iOS / Android / Mac
+- Support .NET 8 / .NET 9 native iOS / Android / Mac
 - Configurable disk and memory caching
 - Multiple image views using the same image source (url, path, resource) will use only one bitmap which is cached in memory (less memory usage)
 - Deduplication of similar download/load requests. *(If 100 similar requests arrive at same time then one real loading will be performed while 99 others will wait).*
